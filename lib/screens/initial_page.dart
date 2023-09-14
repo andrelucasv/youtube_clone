@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../youtube_api.dart';
+
 class Inicio extends StatefulWidget {
   const Inicio({super.key});
 
@@ -10,6 +12,10 @@ class Inicio extends StatefulWidget {
 class _InicioState extends State<Inicio> {
   @override
   Widget build(BuildContext context) {
+
+    Api api = Api();
+    api.pesquisar("");
+
     return const Center(
       child: Text(
         "Início",
