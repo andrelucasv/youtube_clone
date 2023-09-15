@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'model/video_page.dart'; 
+import 'model/video_list.dart'; 
 
 const chaveYoutubeApi = "AIzaSyBywYyy58uwVOKM0tn25SsWwEOBLuduTDw";
 const idCanal = "UCVHFbqXqoYvEWM1Ddxl0QDg";
@@ -10,7 +10,7 @@ const urlBase = "https://www.googleapis.com/youtube/v3/";
 
 class Api {
   
-  pesquisar (String pesquisa) async {
+  Future<List<Video>?> pesquisar (String pesquisa) async {
 
     http.Response response = await http.get(Uri.parse(
         "${urlBase}search"
@@ -33,6 +33,8 @@ class Api {
             //return Video.converterJson(map);
           }
         ).toList();
+
+        return videos;
 
         /*
         for (var video in dadosJson["items"]){
