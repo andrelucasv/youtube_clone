@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert'; 
+import 'dart:convert';
+
+import 'model/video_page.dart'; 
 
 const chaveYoutubeApi = "AIzaSyBywYyy58uwVOKM0tn25SsWwEOBLuduTDw";
 const idCanal = "UCVHFbqXqoYvEWM1Ddxl0QDg";
@@ -24,7 +26,21 @@ class Api {
       if(response.statusCode == 200){
 
         Map<String, dynamic> dadosJson = json.decode(response.body);
-        debugPrint("Resultado: ${dadosJson["items"][0]["snippet"]["title"].toString()}");
+
+        List<Video> videos = dadosJson["items"].map<Video>(
+          (map){
+            return Video.fromJson(map);
+            //return Video.converterJson(map);
+          }
+        ).toList();
+
+        /*
+        for (var video in dadosJson["items"]){
+          debugPrint("Resultado: ${video.toString()}");
+        }
+        */
+
+        //debugPrint("Resultado: ${dadosJson["items"][0]["snippet"]["title"].toString()}");
 
       } else {
 
