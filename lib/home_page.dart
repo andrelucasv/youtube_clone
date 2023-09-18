@@ -15,15 +15,15 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   int _indiceAtual = 0;
+  String _resultado = "";
 
   @override
   Widget build(BuildContext context) {
-
-    List<Widget> telas = const [
-      Inicio(),
-      EmAlta(),
-      Inscricao(),
-      Biblioteca()
+    List<Widget> telas = [
+      Inicio(_resultado),
+      const EmAlta(),
+      const Inscricao(),
+      const Biblioteca()
     ];
 
     return Scaffold(
@@ -42,6 +42,10 @@ class _HomeState extends State<Home> {
           IconButton(
             onPressed: () async {
               String? res = await showSearch(context: context, delegate: CustomSearchDelegate());
+              setState(() {
+                _resultado = res!;
+              });
+              debugPrint("Resultado: digitado $res");
             }, 
             icon: const Icon(Icons.search)
           ),
