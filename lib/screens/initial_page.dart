@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_clone/model/video_list.dart';
+import 'package:youtube_clone/screens/video_page.dart';
 
 import '../youtube_api.dart';
 
@@ -24,8 +25,6 @@ class _InicioState extends State<Inicio> {
 
     }
 
-    
-
     return FutureBuilder<List<Video>?>(
       future: listarVideos(widget.pesquisa),
       builder: (context, snapshot){
@@ -46,22 +45,27 @@ class _InicioState extends State<Inicio> {
                   List<Video> videos = snapshot.data!;
                   Video video = videos[index];
 
-                  return Column(
-                    children: [
-                      Container(
-                        height: 200,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(video.imagem!)
-                          )
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => VideoPage(video: video)));
+                    },
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 200,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(video.imagem!)
+                            )
+                          ),
                         ),
-                      ),
-                      ListTile(
-                        title: Text(video.titulo!),
-                        subtitle: Text(video.canal!),
-                      )
-                    ],
+                        ListTile(
+                          title: Text(video.titulo!),
+                          subtitle: Text(video.canal!),
+                        )
+                      ],
+                    ),
                   );
 
                 }, 

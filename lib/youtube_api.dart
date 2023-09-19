@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -45,7 +44,7 @@ class Api {
         //debugPrint("Resultado: ${dadosJson["items"][0]["snippet"]["title"].toString()}");
 
       } else {
-        
+
       }
 
   }
